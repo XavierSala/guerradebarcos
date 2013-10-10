@@ -28,7 +28,7 @@ public class TestBarco {
     }
 
     @Test
-    public void test2() {
+    public void testPartsDelBarcoSEnfonsen() {
         fail("Not yet implemented");
     }
     
