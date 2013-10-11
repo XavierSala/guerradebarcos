@@ -44,8 +44,24 @@ public class Barco {
         
         int pesa = posicions.indexOf(lloc);
         
-        if (pesa != -1) return true;
+        if (pesa != -1) {
+            posicions.remove(pesa);
+            return true;
+        }
         return false;
+        
+    }
+        
+    public boolean estaEnfonsat() {
+        return (posicions.size() == 0);
+    }
+    
+    public String toString() {
+        String resultat = ""; 
+        for(String s: posicions) {
+            resultat = resultat +  s + " ";
+        }
+        return resultat.trim();
     }
     
 }

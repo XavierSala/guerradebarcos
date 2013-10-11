@@ -7,16 +7,18 @@ import org.junit.Test;
 
 public class TestBarco {
 
-    Barco b, c;
+    Barco b, c, d;
     
     @Before
     public void setUp() throws Exception {
         
         String[] barca1 = { "A1", "A2" };
         String[] barca2 = { "B0", "B1", "B2" };
+        String[] barca3 = {};
         
         b = new Barco(barca1);
         c = new Barco(barca2);
+        d = new Barco(barca3);
     }
 
     @Test
@@ -29,7 +31,24 @@ public class TestBarco {
 
     @Test
     public void testPartsDelBarcoSEnfonsen() {
-        fail("Not yet implemented");
+        assertTrue("Hauria de tocar el barco", b.comprovaPosicio("A1"));
+        assertFalse("No hauria de tocar el barco", b.comprovaPosicio("A1"));
+    }
+    
+    @Test
+    public void testBarcoEnfonsat() {
+        assertFalse("Està enfonsat i no hauria",b.estaEnfonsat());               
+        assertTrue("No està enfonsat",d.estaEnfonsat());
+    }
+    
+    @Test
+    public void testPosicionsBarco() {
+        assertEquals("A1 A2", b.toString());
+    }
+    
+    @Test
+    public void testPosicionsNull() {
+        assertFalse("Hauria de tornar false", b.comprovaPosicio(null));        
     }
     
 }
