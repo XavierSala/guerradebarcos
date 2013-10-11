@@ -15,10 +15,7 @@ public class TaulerTest {
         
     }
 
-    // -- barco dins del tauler
-    // -- que els barcos no es sobreposin
-    // -- no diagonals o posicions saltades
-        
+            
     @Test
     public void testQueNoEntrenMesBarcosDelsPossibles() {
         
@@ -50,4 +47,36 @@ public class TaulerTest {
         
     }
 
+    @Test
+    public void testSepararPosicions() {
+        assertEquals(3, t.SepararPosicions("D3")[0]);
+        assertEquals(1, t.SepararPosicions("B1")[0]);
+        assertEquals(26, t.SepararPosicions("AA4")[0]);
+        assertEquals(4, t.SepararPosicions("AA4")[1]);
+        assertEquals(26*26*3 + 26*1 + 5 - 1, t.SepararPosicions("CAE123")[0]);
+    }
+    
+    @Test
+    public void testPosicionsCorrectes() {
+        // Posició correcta (tauler 3x3
+        String[] barco1 = {"B2" };
+        assertTrue(t.setBarco(barco1));
+        
+        // Fora del tauler
+        barco1[0] = "ABCD23";
+        assertFalse(t.setBarco(barco1));
+        
+        // Posició incorrecta
+        barco1[0] = "A1B2";
+        assertFalse(t.setBarco(barco1));
+        
+        // Posició incorrecta
+        barco1[0] = "1B";
+        assertFalse(t.setBarco(barco1));
+        
+    }
+    
+    // -- que els barcos no es sobreposin
+    // -- no diagonals o posicions saltades
+    
 }
