@@ -1,4 +1,4 @@
-guerradebarcos
+﻿guerradebarcos
 ==============
 
 Projecte de creació del joc de guerra de barcos en objectes Java. La idea és 
