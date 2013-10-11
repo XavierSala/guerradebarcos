@@ -19,6 +19,6 @@ verticalment. Hi poden haver barcos de diferents mides:
     H| | |%| | |%| | | | | 
     I| | |%| | | | | | | | 
 
-Fet a classe de Programació com a exemple de Programació Orientada a Objectes en
+Fet a classe de Programació com a exemple de inici a la Programació Orientada a Objectes en
 llenguatge Java
 
