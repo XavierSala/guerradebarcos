@@ -16,6 +16,7 @@ public class TestBarco {
         String[] barca2 = { "B0", "B1", "B2" };
         String[] barca3 = {};
         
+        // Crea els barcos que faran servir els exemples
         b = new Barco(barca1);
         c = new Barco(barca2);
         d = new Barco(barca3);

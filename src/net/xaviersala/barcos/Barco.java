@@ -14,17 +14,17 @@ import java.util.ArrayList;
  *
  */
 public class Barco {
-    ArrayList<String> posicions;
+    ArrayList<String> caselles;
     
     /**
      * Constructor de barcos a partir d'una llista de posicions.
      * 
-     * @param posicions Rep les posicions del barco com a paràmetres
+     * @param casellesPerAfegir Rep les posicions del barco com a paràmetres
      */
-    public Barco(String[] posicions) {
-        this.posicions = new ArrayList<String>();
-        for(String posicio: posicions) {
-            this.posicions.add(posicio);
+    public Barco(String[] casellesPerAfegir) {
+        this.caselles = new ArrayList<String>();
+        for(String casella: casellesPerAfegir) {
+            this.caselles.add(casella);
         }
     }
 
@@ -37,28 +37,40 @@ public class Barco {
      * En cas de que la posició hi sigui s'elimina del barco perquè 
      * aquesta posició ha estat "enfonsada"
      * 
-     * @param lloc La posició a comprovar
+     * @param casellaAComprovar La posició a comprovar
      * @return Retorna si el barco ha estat tocat o no
      */
-    public boolean comprovaPosicio(String lloc) {
+    public boolean comprovaPosicio(String casellaAComprovar) {
         
-        int pesa = posicions.indexOf(lloc);
+        int indexCasella = caselles.indexOf(casellaAComprovar);
         
-        if (pesa != -1) {
-            posicions.remove(pesa);
+        if (indexCasella != -1) {
+            caselles.remove(indexCasella);
             return true;
         }
         return false;
         
     }
         
+    /**
+     * Determina si el barco ha estat enforsat perquè
+     * no li queden caselles. 
+     * 
+     * @return Retorna si el barco està enfonsat o no
+     */
     public boolean estaEnfonsat() {
-        return (posicions.size() == 0);
+        return (caselles.size() == 0);
     }
     
+    /**
+     * Retorna les caselles del barco en un String 
+     * separat per espais
+     * 
+     */
+    @Override
     public String toString() {
         String resultat = ""; 
-        for(String s: posicions) {
+        for(String s: caselles) {
             resultat = resultat +  s + " ";
         }
         return resultat.trim();

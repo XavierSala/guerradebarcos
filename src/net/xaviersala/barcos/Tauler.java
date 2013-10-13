@@ -7,11 +7,11 @@ public class Tauler {
     /**
      * Caselles d'amplada del tauler
      */
-    int ampladaTauler;
+    int casellesAmplada;
     /**
      * Caselles de llargada del tauler
      */
-    int alturaTauler;
+    int casellesAltura;
     
     /**
      * Número de barcos màxim que pot tenir el
@@ -19,7 +19,7 @@ public class Tauler {
      * 
      * Per defecte en té 3
      */
-    int numeroBarcos;
+    int maximNumeroDeBarcos;
     /**
      * Array amb els barcos que té el tauler
      */
@@ -31,13 +31,13 @@ public class Tauler {
      * determinaran l'amplada i l'altura expressada en 
      * número de caselles
      * 
-     * @param amplada amplada del tauler
-     * @param altura altura del tauler
+     * @param ampladaDesitjada amplada del tauler
+     * @param alturaDesitjada altura del tauler
      */
-    public Tauler(int amplada, int altura) {
-        ampladaTauler = amplada;
-        alturaTauler = altura;    
-        numeroBarcos = 3;
+    public Tauler(int ampladaDesitjada, int alturaDesitjada) {
+        casellesAmplada = ampladaDesitjada;
+        casellesAltura = alturaDesitjada;    
+        maximNumeroDeBarcos = 3;
         barcos = new ArrayList<Barco>();
     }
     
@@ -47,8 +47,15 @@ public class Tauler {
      * 
      * @param x número de barcos
      */
-    public void setNumeroBarcos(int x) {
-        numeroBarcos = x;
+    public void setMaximNumeroBarcos(int x) {
+        maximNumeroDeBarcos = x;
+    }
+    
+    /**
+     * Obtenir el número màxim de barcos del taular
+     */
+    public int getMaximNumeroBarcos() {
+        return maximNumeroDeBarcos;
     }
     
     /**
@@ -57,28 +64,28 @@ public class Tauler {
      * 
      * Per exemple AB23 ha de tornar [27,23]
      * 
-     * @param posicioUsuari Posició triada en la forma "AA23"
+     * @param posicioCasella Posició triada en la forma "AA23"
      * @return retorna un array amb les posicions numèriques del
      *         barco
      */
-    int[] SepararPosicions(String posicioUsuari) {
+    int[] SepararPosicions(String posicioCasella) {
         String abecedari="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        int totalLletres = abecedari.length();
+        int lletresAbecedari = abecedari.length();
         
         int[] resultat = new int[2];
         // Obtenir les lletres
-        String lletres = posicioUsuari.split("[0-9]+")[0];
+        String partAmbLesLletres = posicioCasella.split("[0-9]+")[0];
         
-        int exponent = 1;
-        int numLletres = lletres.length() - 1;
-        for (int i=0; i <= numLletres; i++) {
-            int indexLletra = abecedari.indexOf(lletres.charAt(numLletres-i)) + 1;
-            resultat[0] = resultat[0] + indexLletra * exponent;
-            exponent = exponent * totalLletres;
+        int multiplicador = 1;
+        int totalLletresPosicio = partAmbLesLletres.length() - 1;
+        for (int i=0; i <= totalLletresPosicio; i++) {
+            int posicioLletraEnAbecedari = abecedari.indexOf(partAmbLesLletres.charAt(totalLletresPosicio-i)) + 1;
+            resultat[0] = resultat[0] + posicioLletraEnAbecedari * multiplicador;
+            multiplicador = multiplicador * lletresAbecedari;
         }
         resultat[0] = resultat[0] - 1;
         // Obtenir el número
-        resultat[1] =  Integer.parseInt(posicioUsuari.split("[A-Z]+")[1]);
+        resultat[1] =  Integer.parseInt(posicioCasella.split("[A-Z]+")[1]);
                    
         return resultat;
         
@@ -88,22 +95,22 @@ public class Tauler {
      * Afegeix un barco en les posicions rebudes a l'array
      * barcos.
      * 
-     * @param posicions Les posicions on volem posar el barco
+     * @param casellesDelBarco Les posicions on volem posar el barco
      * @return retorna si el barco s'ha pogut posar o no
      */
-    public boolean setBarco(String[] posicions) {
+    public boolean setBarco(String[] casellesDelBarco) {
 
-        if (barcos.size() < numeroBarcos) {
+        if (barcos.size() < maximNumeroDeBarcos) {
             
             // -- Provar totes les posicions
-            for(String posicio: posicions) {
+            for(String casella: casellesDelBarco) {
                 // 1. Comprovar que la posició és correcta
-                if (!posicio.matches("[A-Z]+[0-9]+")) {
+                if (!casella.matches("[A-Z]+[0-9]+")) {
                     return false;
                 }
                 // 2. Comprovar que el barco està dins del tauler
-                int[] pesaBarco = SepararPosicions(posicio);                
-                if (pesaBarco[0] >= alturaTauler || pesaBarco[1] >= ampladaTauler ) {
+                int[] posicioBarco = SepararPosicions(casella);                
+                if (posicioBarco[0] >= casellesAltura || posicioBarco[1] >= casellesAmplada ) {
                     return false;
                 }
                 
@@ -113,7 +120,7 @@ public class Tauler {
             }
             
             
-            barcos.add(new Barco(posicions));
+            barcos.add(new Barco(casellesDelBarco));
             return true;
         }
         
@@ -126,10 +133,10 @@ public class Tauler {
      * 
      * També haurà de comprovar si algun barco ha estat eliminat
      * 
-     * @param casella
+     * @param casellaAComprovar
      * @return Retorna el que ha passat "aigua", "tocat", "error", "enfonsat"
      */
-    public String comprovaPosicio(String casella) {
+    public String comprovaPosicio(String casellaAComprovar) {
         
         return "error";
     }
@@ -140,7 +147,7 @@ public class Tauler {
      * 
      * @return
      */
-    public boolean estaSenseBarcos() {
+    public boolean totsElsBarcosEnfonsats() {
         return false;
     }
     
@@ -150,7 +157,7 @@ public class Tauler {
      * @return retorna la mida del tauler
      */
     public String getMida() {
-        return ampladaTauler + "x" + alturaTauler;
+        return casellesAmplada + "x" + casellesAltura;
     }
     
 }
