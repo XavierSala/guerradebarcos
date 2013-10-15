@@ -55,4 +55,20 @@ public class Casella {
         
     }
     
+    @Override
+    public boolean equals(Object altraCasella){
+        // comprovo que no sigui 'null'
+        if (altraCasella == null) return false;
+        // comprovo que no és el mateix objecte
+        if (altraCasella == this) return true;
+        // comprovo que sigui realment una casella
+        if (!(altraCasella instanceof Casella))return false;
+        Casella casella = (Casella)altraCasella;
+        
+        if (posicioString == casella.getPosicioString()) {
+            return true;
+        }
+        return false;
+    }
+    
 }

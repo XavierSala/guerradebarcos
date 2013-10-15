@@ -28,34 +28,118 @@ public class Barco {
         }
     }
     
+    
+    /** 
+     * Comprova si el barco té les caselles en posicions consecutives en
+     * vertical o horitzontal
+     * 
+     * @return
+     */
     boolean elBarcoEsCorrecte() {
+        
+        if (caselles.size() == 0) { 
+            return false;
+        }
+        
+        Casella posicioInicial0 = caselles.get(0);
+        Casella posicioInicial1 = caselles.get(1);
+
+        // Miro les dues primeres posicions per saber si és horitzontal o vertical
+        if (posicioInicial0.getPosicioX() == posicioInicial1.getPosicioX()) {
+            return isBarcoHoritzontal();
+        } else if (posicioInicial0.getPosicioY() == posicioInicial1.getPosicioY()) {
+            return isBarcoVertical();
+        }
+        return false;        
+    }
+
+    /**
+     * Comprova si el barco és un barco vertical. Els barcos verticals
+     * destaquen perquè la coordenada Y és sempre la mateixa.
+     * 
+     * (millorable, està fet d'aquesta forma per claredat)
+     * 
+     * @return Si és vertical o no
+     */
+    private boolean isBarcoVertical() {
+        int posicioFixa = caselles.get(0).getPosicioY();
+        int posicioMobil = caselles.get(0).getPosicioX();
+        
+        // Podria començar per 2 però no ho faig per fer la funció
+        // usable des de diferents llocs
+        for(int i=1; i< caselles.size(); i++) {
+            if (caselles.get(i).getPosicioY() != posicioFixa || 
+                    caselles.get(i).getPosicioX() != posicioMobil + i) {
+                return false;
+            }
+        }
         return true;
     }
+
+    /**
+     * Comprova si el barco és un barco horitzontal. Els barcos horitzontals
+     * destaquen perquè la coordenada X és sempre la mateixa.
+     * 
+     * (millorable, està fet d'aquesta forma per claredat)
+     * 
+     * @return Si és horitzontals o no
+     */
+    private boolean isBarcoHoritzontal() {
+        int posicioFixa = caselles.get(0).getPosicioX();
+        int posicioMobil = caselles.get(0).getPosicioY();
+        
+        for(int i=1; i< caselles.size(); i++) {
+            if (caselles.get(i).getPosicioX() != posicioFixa || 
+                    caselles.get(i).getPosicioY() != posicioMobil + i) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 
     /**
      * Funció que comprova si han tocat el barco a partir d'una posició
      * que li especifiquem.
      * 
-     * Les posicions estaran en format text "A1", "E6", etc..
-     * 
-     * En cas de que la posició hi sigui s'elimina del barco perquè 
-     * aquesta posició ha estat "enfonsada"
+     * En cas de que la posició hi sigui es tornarà la posició dins de
+     * l'array o bé -1 i no l'ha trobat
      * 
      * @param casellaAComprovar La posició a comprovar
-     * @return Retorna si el barco ha estat tocat o no
+     * @return Retorna si l'ha trobat o no
      */
-    public boolean comprovaPosicio(String casellaAComprovar) {
+    public int comprovaPosicio(String casellaAComprovar) {
         
-        int indexCasella = caselles.indexOf(casellaAComprovar);
+        if (casellaAComprovar == null) return -1;
+        
+        Casella candidata = new Casella(casellaAComprovar);
+        
+        return caselles.indexOf(candidata);
+        
+    }
+        
+    
+    /**
+     * Esborra la casella especificada
+     * 
+     * La casella s'especifica en una cadena amb la posició
+     * 
+     * @param casellaAEliminar La posició a comprovar
+     * @return Retorna si ha eliminat el barco o no
+     */
+    public boolean eliminaCasella(String casellaAEliminar) {
+        if (casellaAEliminar == null) return false;
+        
+        int indexCasella = comprovaPosicio(casellaAEliminar);
         
         if (indexCasella != -1) {
             caselles.remove(indexCasella);
             return true;
         }
         return false;
-        
     }
-        
+    
+    
     /**
      * Determina si el barco ha estat enforsat perquè
      * no li queden caselles. 
