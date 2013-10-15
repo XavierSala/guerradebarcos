@@ -58,6 +58,7 @@ public class TestTauler {
         
         // Posició incorrecta
         barco1[0] = "A1B2";
+
         assertEquals("Això no és un barco", t.setBarco(barco1));
         
         // Posició incorrecta

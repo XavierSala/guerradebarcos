@@ -77,6 +77,11 @@ public class Tauler {
             if (barcoNou.getNumeroDeCaselles() == 0) {
                 return "Això no és un barco";
             }
+         
+            // 1. Comprovar que les posicions de les caselles són correctes
+            if (posicionsCorrectes(casellesDelBarco) == false) {
+                return "Casella incorrecta";
+            }
             
             // 2. Comprovar que la casella està dins del tauler                        
             if (barcoNou.getMaximaColumna() >= casellesAmplada 
@@ -88,7 +93,7 @@ public class Tauler {
             if (!barcoNou.elBarcoEsCorrecte()) {
                 return "El barco no és correcte";
             }
-            
+
             // 4.Comprovar que no col·lisiona amb cap altre barco
                 
                 
@@ -97,9 +102,21 @@ public class Tauler {
             return "OK";
         }
         
-        return "Ja hi ha tots els barcos";
+        return "Ja hi ha tots els barcos";        
     }
     
+    private boolean posicionsCorrectes(String[] casellesDelBarco) {
+        // -- Provar totes les posicions
+        for(String casella: casellesDelBarco) {
+            
+            if (!casella.matches("[A-Z]+[0-9]+")) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
     /**
      * Comprova si la posició que ens han posat la té algun barco
      * o no la té ningú.

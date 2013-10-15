@@ -43,7 +43,7 @@ public class Barco {
      * @return
      */
     boolean elBarcoEsCorrecte() {
-                
+        // Si no hi ha caselles, no és un barco
         // Si no hi ha caselles, no és un barco
         if (caselles.size() == 0) { 
             return false;
@@ -194,7 +194,6 @@ public class Barco {
         return maxim;
     }
     
-    
     /**
      * Retorna el número de caselles del barco
      * 
@@ -203,7 +202,6 @@ public class Barco {
     public int getNumeroDeCaselles() {
         return caselles.size();
     }
-    
     
     /**
      * Retorna les caselles del barco en un String 
