@@ -19,11 +19,18 @@ public class Barco {
     /**
      * Constructor de barcos a partir d'una llista de posicions.
      * 
+     * Si una de les caselles és errònia, no afegeix el barco
+     * 
      * @param casellesPerAfegir Rep les posicions del barco com a paràmetres
      */
     public Barco(String[] casellesPerAfegir) {
         this.caselles = new ArrayList<Casella>();
-        for(String casella: casellesPerAfegir) {            
+        for(String casella: casellesPerAfegir) {  
+            if (!casella.matches("[A-Z]+[0-9]+")) {
+                // Error! No afegir el barco
+                caselles.clear();
+                break;
+            }
             this.caselles.add(new Casella(casella));
         }
     }
@@ -36,20 +43,27 @@ public class Barco {
      * @return
      */
     boolean elBarcoEsCorrecte() {
-        
+                
+        // Si no hi ha caselles, no és un barco
         if (caselles.size() == 0) { 
             return false;
         }
         
+        // Si només té una casella és un "submarí"!
+        if (caselles.size()==1) {
+            return true;
+        }
+        
+        // Miro les dues primeres posicions per saber si és horitzontal o vertical
         Casella posicioInicial0 = caselles.get(0);
         Casella posicioInicial1 = caselles.get(1);
-
-        // Miro les dues primeres posicions per saber si és horitzontal o vertical
+        
+        // Comprovo si és un barco...
         if (posicioInicial0.getPosicioX() == posicioInicial1.getPosicioX()) {
             return isBarcoHoritzontal();
         } else if (posicioInicial0.getPosicioY() == posicioInicial1.getPosicioY()) {
             return isBarcoVertical();
-        }
+        }        
         return false;        
     }
 
@@ -149,6 +163,47 @@ public class Barco {
     public boolean estaEnfonsat() {
         return (caselles.size() == 0);
     }
+    
+    /** 
+     * Columna més gran usada pel barco
+     * 
+     * @return la columna més gran
+     */
+    public int getMaximaColumna() {
+        int maxim = 0;
+        for (Casella casella: caselles) {
+            if (casella.getPosicioX() > maxim) {
+                maxim = casella.getPosicioX();
+            }
+        }
+        return maxim;
+    }
+    
+    /** 
+     * Fila més gran usada pel barco
+     * 
+     * @return la fila més gran
+     */
+    public int getMaximaFila() {
+        int maxim = caselles.get(0).getPosicioY();
+        for (Casella casella: caselles) {
+            if (casella.getPosicioY() > maxim) {
+                maxim = casella.getPosicioX();
+            }
+        }
+        return maxim;
+    }
+    
+    
+    /**
+     * Retorna el número de caselles del barco
+     * 
+     * @return número de caselles
+     */
+    public int getNumeroDeCaselles() {
+        return caselles.size();
+    }
+    
     
     /**
      * Retorna les caselles del barco en un String 

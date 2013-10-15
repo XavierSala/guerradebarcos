@@ -40,19 +40,10 @@ public class TestTauler {
         t.setMaximNumeroBarcos(10);
         assertEquals("El barco ha d'entrar","OK", t.setBarco(barco1));
         assertEquals("El barco ha d'entrar","OK", t.setBarco(barco2));
-        assertEquals("El barco no ha d'entrar","casella fora del tauler",t.setBarco(barco3));
+        assertEquals("El barco no ha d'entrar","Casella fora del tauler",t.setBarco(barco3));
         assertEquals("El barco ha d'entrar","OK", t.setBarco(barco4));
-        assertEquals("El barco no ha d'entrar","casella fora del tauler", t.setBarco(barco5));
+        assertEquals("El barco no ha d'entrar","Casella fora del tauler", t.setBarco(barco5));
                 
-    }
-
-    @Test
-    public void testSepararPosicions() {
-        assertEquals(3, t.SepararPosicions("D3")[0]);
-        assertEquals(1, t.SepararPosicions("B1")[0]);
-        assertEquals(26, t.SepararPosicions("AA4")[0]);
-        assertEquals(4, t.SepararPosicions("AA4")[1]);
-        assertEquals(26*26*3 + 26*1 + 5 - 1, t.SepararPosicions("CAE123")[0]);
     }
     
     @Test
@@ -63,15 +54,15 @@ public class TestTauler {
         
         // Fora del tauler
         barco1[0] = "ABCD23";
-        assertEquals("casella fora del tauler", t.setBarco(barco1));
+        assertEquals("Casella fora del tauler", t.setBarco(barco1));
         
         // Posició incorrecta
         barco1[0] = "A1B2";
-        assertEquals("casella incorrecta", t.setBarco(barco1));
+        assertEquals("Això no és un barco", t.setBarco(barco1));
         
         // Posició incorrecta
         barco1[0] = "1B";
-        assertEquals("casella incorrecta", t.setBarco(barco1));
+        assertEquals("Això no és un barco", t.setBarco(barco1));
         
     }
     
