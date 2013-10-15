@@ -88,7 +88,7 @@ public class Tauler {
             if (!barcoNou.elBarcoEsCorrecte()) {
                 return "El barco no és correcte";
             }
-                
+            
             // 4.Comprovar que no col·lisiona amb cap altre barco
                 
                 
