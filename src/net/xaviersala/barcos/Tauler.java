@@ -98,7 +98,7 @@ public class Tauler {
      * @param casellesDelBarco Les posicions on volem posar el barco
      * @return retorna si el barco s'ha pogut posar o no
      */
-    public boolean setBarco(String[] casellesDelBarco) {
+    public String setBarco(String[] casellesDelBarco) {
 
         if (barcos.size() < maximNumeroDeBarcos) {
             
@@ -106,25 +106,25 @@ public class Tauler {
             for(String casella: casellesDelBarco) {
                 // 1. Comprovar que la posició és correcta
                 if (!casella.matches("[A-Z]+[0-9]+")) {
-                    return false;
+                    return "casella incorrecta";
                 }
                 // 2. Comprovar que el barco està dins del tauler
                 int[] posicioBarco = SepararPosicions(casella);                
                 if (posicioBarco[0] >= casellesAltura || posicioBarco[1] >= casellesAmplada ) {
-                    return false;
+                    return "casella fora del tauler";
                 }
                 
-                // 
+                // 3. Comprovar que les caselles són adjacents
                 
                 // comprovar
             }
             
             
             barcos.add(new Barco(casellesDelBarco));
-            return true;
+            return "OK";
         }
         
-        return false;
+        return "Ja hi ha tots els barcos";
     }
     
     /**

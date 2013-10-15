@@ -23,8 +23,8 @@ public class TestTauler {
         String[] barco2 = { "A1" };
         
         t.setMaximNumeroBarcos(1);
-        assertTrue("El barco hi ha de caber",t.setBarco(barco1));
-        assertTrue("El barco no hi ha de caber",!t.setBarco(barco2));
+        assertEquals("El barco hi ha de caber","OK", t.setBarco(barco1));
+        assertEquals("El barco no hi ha de caber","Ja hi ha tots els barcos", t.setBarco(barco2));
         
         
     }
@@ -38,11 +38,11 @@ public class TestTauler {
         String[] barco4 = { "B1" };
         String[] barco5 = { "D1" };
         t.setMaximNumeroBarcos(10);
-        assertTrue("El barco ha d'entrar",t.setBarco(barco1));
-        assertTrue("El barco ha d'entrar",t.setBarco(barco2));
-        assertTrue("El barco no ha d'entrar",!t.setBarco(barco3));
-        assertTrue("El barco ha d'entrar",t.setBarco(barco4));
-        assertFalse("El barco no ha d'entrar",t.setBarco(barco5));
+        assertEquals("El barco ha d'entrar","OK", t.setBarco(barco1));
+        assertEquals("El barco ha d'entrar","OK", t.setBarco(barco2));
+        assertEquals("El barco no ha d'entrar","casella fora del tauler",t.setBarco(barco3));
+        assertEquals("El barco ha d'entrar","OK", t.setBarco(barco4));
+        assertEquals("El barco no ha d'entrar","casella fora del tauler", t.setBarco(barco5));
                 
     }
 
@@ -59,23 +59,22 @@ public class TestTauler {
     public void testPosicionsCorrectes() {
         // Posició correcta (tauler 3x3
         String[] barco1 = {"B2" };
-        assertTrue(t.setBarco(barco1));
+        assertEquals("OK", t.setBarco(barco1));
         
         // Fora del tauler
         barco1[0] = "ABCD23";
-        assertFalse(t.setBarco(barco1));
+        assertEquals("casella fora del tauler", t.setBarco(barco1));
         
         // Posició incorrecta
         barco1[0] = "A1B2";
-        assertFalse(t.setBarco(barco1));
+        assertEquals("casella incorrecta", t.setBarco(barco1));
         
         // Posició incorrecta
         barco1[0] = "1B";
-        assertFalse(t.setBarco(barco1));
+        assertEquals("casella incorrecta", t.setBarco(barco1));
         
     }
     
-    // -- que els barcos no es sobreposin
-    // -- no diagonals o posicions saltades
+  
     
 }

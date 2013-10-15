@@ -14,7 +14,7 @@ import java.util.ArrayList;
  *
  */
 public class Barco {
-    ArrayList<String> caselles;
+    ArrayList<Casella> caselles;
     
     /**
      * Constructor de barcos a partir d'una llista de posicions.
@@ -22,10 +22,14 @@ public class Barco {
      * @param casellesPerAfegir Rep les posicions del barco com a paràmetres
      */
     public Barco(String[] casellesPerAfegir) {
-        this.caselles = new ArrayList<String>();
-        for(String casella: casellesPerAfegir) {
-            this.caselles.add(casella);
+        this.caselles = new ArrayList<Casella>();
+        for(String casella: casellesPerAfegir) {            
+            this.caselles.add(new Casella(casella));
         }
+    }
+    
+    boolean elBarcoEsCorrecte() {
+        return true;
     }
 
     /**
@@ -70,8 +74,8 @@ public class Barco {
     @Override
     public String toString() {
         String resultat = ""; 
-        for(String s: caselles) {
-            resultat = resultat +  s + " ";
+        for(Casella s: caselles) {
+            resultat = resultat +  s.getPosicioString() + " ";
         }
         return resultat.trim();
     }
