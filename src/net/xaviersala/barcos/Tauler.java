@@ -57,40 +57,7 @@ public class Tauler {
     public int getMaximNumeroBarcos() {
         return maximNumeroDeBarcos;
     }
-    
-    /**
-     * Funció que separa el que ens ha enviat un usuari i ens retorna
-     * la posició triada en un array de integers.
-     * 
-     * Per exemple AB23 ha de tornar [27,23]
-     * 
-     * @param posicioCasella Posició triada en la forma "AA23"
-     * @return retorna un array amb les posicions numèriques del
-     *         barco
-     */
-    int[] SepararPosicions(String posicioCasella) {
-        String abecedari="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        int lletresAbecedari = abecedari.length();
         
-        int[] resultat = new int[2];
-        // Obtenir les lletres
-        String partAmbLesLletres = posicioCasella.split("[0-9]+")[0];
-        
-        int multiplicador = 1;
-        int totalLletresPosicio = partAmbLesLletres.length() - 1;
-        for (int i=0; i <= totalLletresPosicio; i++) {
-            int posicioLletraEnAbecedari = abecedari.indexOf(partAmbLesLletres.charAt(totalLletresPosicio-i)) + 1;
-            resultat[0] = resultat[0] + posicioLletraEnAbecedari * multiplicador;
-            multiplicador = multiplicador * lletresAbecedari;
-        }
-        resultat[0] = resultat[0] - 1;
-        // Obtenir el número
-        resultat[1] =  Integer.parseInt(posicioCasella.split("[A-Z]+")[1]);
-                   
-        return resultat;
-        
-    }
-    
     /** 
      * Afegeix un barco en les posicions rebudes a l'array
      * barcos.
@@ -101,32 +68,49 @@ public class Tauler {
     public String setBarco(String[] casellesDelBarco) {
 
         if (barcos.size() < maximNumeroDeBarcos) {
-            
-            // -- Provar totes les posicions
-            for(String casella: casellesDelBarco) {
-                // 1. Comprovar que la posició és correcta
-                if (!casella.matches("[A-Z]+[0-9]+")) {
-                    return "casella incorrecta";
-                }
-                // 2. Comprovar que el barco està dins del tauler
-                int[] posicioBarco = SepararPosicions(casella);                
-                if (posicioBarco[0] >= casellesAltura || posicioBarco[1] >= casellesAmplada ) {
-                    return "casella fora del tauler";
-                }
-                
-                // 3. Comprovar que les caselles són adjacents
-                
-                // comprovar
+         
+            // 1. Comprovar que les posicions de les caselles són correctes
+            if (posicionsCorrectes(casellesDelBarco) == false) {
+                return "Casella incorrecta";
             }
             
+            // Creem un barco per fer-hi comprovacions
+            Barco barcoNou = new Barco(casellesDelBarco);
             
-            barcos.add(new Barco(casellesDelBarco));
+            // 2. Comprovar que la casella està dins del tauler
+                        
+            if (barcoNou.getMaximaColumna() >= casellesAmplada 
+                    || barcoNou.getMaximaFila() >= casellesAltura ) {
+                return "Casella fora del tauler";
+            }
+                
+            // 3. Comprovar que no es sobreposa amb cap altre barco                
+                
+            
+            
+            // Carreguem el barco només si és correcte
+            
+            if (barcoNou.elBarcoEsCorrecte()) {
+                barcos.add(barcoNou);
+            }
             return "OK";
         }
         
         return "Ja hi ha tots els barcos";
     }
     
+    private boolean posicionsCorrectes(String[] casellesDelBarco) {
+        // -- Provar totes les posicions
+        for(String casella: casellesDelBarco) {
+            
+            if (!casella.matches("[A-Z]+[0-9]+")) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
     /**
      * Comprova si la posició que ens han posat la té algun barco
      * o no la té ningú.
