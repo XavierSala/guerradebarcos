@@ -94,8 +94,12 @@ public class Tauler {
                 return "El barco no és correcte";
             }
 
-            // 4.Comprovar que no col·lisiona amb cap altre barco
-                
+            // 4.Comprovar que no col·lisiona amb cap altre barco            
+            for (Barco barco: barcos) {
+                if (barcoNou.colisionaAmb(barco) == true) {
+                    return "El barco colisiona";
+                }
+            }
                 
             barcos.add(barcoNou);
             

@@ -216,5 +216,23 @@ public class Barco {
         }
         return resultat.trim();
     }
+
+
+    /**
+     * Comprova si alguna de les caselles actual col·lisiona amb una
+     * del barco passat com a paràmetre
+     * 
+     * @param altreBarco Barco a comprovar
+     * @return Si hi ha col·lisió o no
+     */
+    public boolean colisionaAmb(Barco altreBarco) {
+        
+        for(Casella casellaAComprovar: caselles) {
+            if (altreBarco.comprovaPosicio(casellaAComprovar.getPosicioString())!=-1) {
+                return true;
+            }
+        }
+        return false;
+    }
     
 }
