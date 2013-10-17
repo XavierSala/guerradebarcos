@@ -20,7 +20,8 @@ public class TestBarco {
                               { "B0", "B1", "B2" },
                               {},
                               { "A2", "B2", "B3" }, // Barco erròni 
-                              { "A1", "BA1B", "1" }
+                              { "A1", "BA1B", "1" },
+                              { "A2", "B2","C2", "D2" }
                             };
         
         // Crea un array de barcos per fer les proves       
@@ -85,6 +86,13 @@ public class TestBarco {
         assertFalse("El barco no és correcte", barcos.get(2).elBarcoEsCorrecte());
         assertFalse("El barco no és consecutiu", barcos.get(3).elBarcoEsCorrecte());
         assertFalse("El barco no és consecutiu", barcos.get(4).elBarcoEsCorrecte());
+    }
+    
+    @Test
+    public void testColisioBarcos() {
+        assertFalse("Barcos no colisionen", barcos.get(0).colisionaAmb(barcos.get(1)));
+        assertTrue("Barcos colisionen", barcos.get(0).colisionaAmb(barcos.get(5)));
+        assertTrue("Barcos no colisionen", barcos.get(1).colisionaAmb(barcos.get(5)));
     }
     
 }

@@ -217,4 +217,15 @@ public class Barco {
         return resultat.trim();
     }
     
+    public boolean colisionaAmb(Barco b) {
+        for(Casella casella: caselles) {
+            if (b.comprovaPosicio(casella.getPosicioString()) != -1)  {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    
+    
 }

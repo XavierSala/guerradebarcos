@@ -95,7 +95,11 @@ public class Tauler {
             }
 
             // 4.Comprovar que no col·lisiona amb cap altre barco
-                
+            for(Barco barco : barcos) {
+                if (barco.colisionaAmb(barcoNou) == true) {
+                    return "El barco xoca amb els altres";
+                }
+            }
                 
             barcos.add(barcoNou);
             
@@ -128,7 +132,14 @@ public class Tauler {
      */
     public String comprovaPosicio(String casellaAComprovar) {
         
-        return "error";
+        for(Barco barco: barcos) {
+            if ( barco.eliminaCasella(casellaAComprovar) == true) {
+                if (barco.estaEnfonsat()) return "enfonsat";
+                else return "tocat";
+            }
+        }
+        
+        return "aigua";
     }
     
     /**
