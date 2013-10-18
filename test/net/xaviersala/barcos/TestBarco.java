@@ -52,7 +52,13 @@ public class TestBarco {
     public void testBarcoTocat() {
         
           assertTrue("No ha tocat el barco i l'hauria d'haver tocat",barcos.get(0).eliminaCasella("A1"));
+          assertTrue("No ha tocat el barco i l'hauria d'haver tocat",barcos.get(0).eliminaCasella("A2"));
+          assertFalse("No ha tocat el barco i l'hauria d'haver tocat",barcos.get(0).eliminaCasella("A1"));
+          assertFalse("No ha tocat el barco i l'hauria d'haver tocat",barcos.get(0).eliminaCasella("A2"));
           assertFalse("No ha tocat el barco i l'hauria d'haver tocat",barcos.get(0).eliminaCasella("A0"));
+          assertTrue("No ha tocat el barco i l'hauria d'haver tocat",barcos.get(1).eliminaCasella("B2"));
+          assertTrue("No ha tocat el barco i l'hauria d'haver tocat",barcos.get(1).eliminaCasella("B0"));
+          assertFalse("No ha tocat el barco i l'hauria d'haver tocat",barcos.get(1).eliminaCasella("B6"));
        
     }
 

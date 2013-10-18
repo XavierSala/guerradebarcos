@@ -65,7 +65,7 @@ public class Casella {
         if (!(altraCasella instanceof Casella))return false;
         Casella casella = (Casella)altraCasella;
         
-        if (posicioString == casella.getPosicioString()) {
+        if (posicioString.equals(casella.getPosicioString())) {
             return true;
         }
         return false;

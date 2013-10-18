@@ -8,6 +8,42 @@ public class Tauler {
      * Caselles d'amplada del tauler
      */
     int casellesAmplada;
+    
+    /**
+     * Retorna l'amplada del tauler.
+     * 
+     * @return Amplada del tauler
+     */
+    public int getAmpladaTauler() {
+        return casellesAmplada;
+    }
+
+
+    /**
+     * Defineix l'amplada del tauler.
+     * 
+     * @param casellesAmplada the casellesAmplada to set
+     */
+    public void setAmpladaTauler(int casellesAmplada) {
+        this.casellesAmplada = casellesAmplada;
+    }
+
+
+    /**
+     * @return the casellesAltura
+     */
+    public int getAlturaTauler() {
+        return casellesAltura;
+    }
+
+
+    /**
+     * @param casellesAltura the casellesAltura to set
+     */
+    public void setAlturaTauler(int casellesAltura) {
+        this.casellesAltura = casellesAltura;
+    }
+
     /**
      * Caselles de llargada del tauler
      */
@@ -130,12 +166,22 @@ public class Tauler {
      * @param casellaAComprovar
      * @return Retorna el que ha passat "aigua", "tocat", "error", "enfonsat"
      */
-    public String comprovaPosicio(String casellaAComprovar) {
+    public String comprovaBarco(String casellaAComprovar) {
         
-        for(Barco barco: barcos) {
-            if ( barco.eliminaCasella(casellaAComprovar) == true) {
-                if (barco.estaEnfonsat()) return "enfonsat";
-                else return "tocat";
+        for(int i=0; i<barcos.size(); i++) {
+            
+            if (barcos.get(i).eliminaCasella(casellaAComprovar)) {
+                if (barcos.get(i).estaEnfonsat()) {
+                    barcos.remove(i);
+                    if (totsElsBarcosEnfonsats()) {
+                        return "He perdut";
+                    } else {
+                        return "enfonsat";
+                    }
+                }
+                else {
+                    return "tocat";
+                }
             }
         }
         
@@ -149,7 +195,7 @@ public class Tauler {
      * @return
      */
     public boolean totsElsBarcosEnfonsats() {
-        return false;
+        return barcos.isEmpty();
     }
     
     /** 

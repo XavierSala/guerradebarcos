@@ -125,10 +125,8 @@ public class Barco {
     public int comprovaPosicio(String casellaAComprovar) {
         
         if (casellaAComprovar == null) return -1;
-        
-        Casella candidata = new Casella(casellaAComprovar);
-        
-        return caselles.indexOf(candidata);
+                       
+        return caselles.indexOf(new Casella(casellaAComprovar));
         
     }
         
