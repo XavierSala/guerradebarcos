@@ -16,11 +16,11 @@ public class TestCasella {
 
     @Test
     public void testSepararPosicions() {
-        assertEquals(3, c.SepararPosicions("D3")[0]);
-        assertEquals(1, c.SepararPosicions("B1")[0]);
-        assertEquals(26, c.SepararPosicions("AA4")[0]);
-        assertEquals(4, c.SepararPosicions("AA4")[1]);
-        assertEquals(26*26*3 + 26*1 + 5 - 1, c.SepararPosicions("CAE123")[0]);
+        assertEquals(3, c.separarPosicions("D3")[0]);
+        assertEquals(1, c.separarPosicions("B1")[0]);
+        assertEquals(26, c.separarPosicions("AA4")[0]);
+        assertEquals(4, c.separarPosicions("AA4")[1]);
+        assertEquals(26*26*3 + 26*1 + 5 - 1, c.separarPosicions("CAE123")[0]);
     }
     
     @Test

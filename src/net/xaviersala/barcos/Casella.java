@@ -1,48 +1,83 @@
 package net.xaviersala.barcos;
 
+/**
+ * Representa una casella del tauler de Guerra de Barcos.
+ *
+ * Cada casella sap en quina posició del tauler està i prou
+ *
+ * @author Xavier
+ *
+ */
 public class Casella {
 
-    String posicioString;
-    int[] posicions;
-    
-    public Casella(String posicioCasella) {
+    /**
+     * Posició de la casella amb caràcters.
+     * per exemple "A2"
+     */
+    private String posicioString;
+    /**
+     * Posició de la casella en coordenades cartesianes.
+     * per exemple [0, 2]
+     */
+    private int[] posicions;
+
+    /**
+     * Construeix una casella a partir de la coordenada especificada
+     * en la cadena "F2".
+     *
+     * @param posicioCasella Coordenada especificada
+     */
+    public Casella(final String posicioCasella) {
         posicioString = posicioCasella;
-        posicions = SepararPosicions(posicioString);
+        posicions = separarPosicions(posicioString);
     }
-    
-    public String getPosicioString() {
+
+    /**
+     * Retorna la coordenada de la casella.
+     *
+     * @return la coordenada de la casella
+     */
+    public final String getPosicioString() {
         return posicioString;
     }
-    
-    public int getPosicioX() {
+
+    /**
+     *
+     * @return la posició X de la casella
+     */
+    public final int getPosicioX() {
         return posicions[0];
     }
-    
-    public int getPosicioY() {
+
+    /**
+     *
+     * @return la posició Y de la casella.
+     */
+    public final int getPosicioY() {
         return posicions[1];
     }
-    
+
     /**
      * Funció que separa el que ens ha enviat un usuari i ens retorna
      * la posició triada en un array de integers.
-     * 
+     *
      * Per exemple AB23 ha de tornar [27,23]
-     * 
+     *
      * @param posicioCasella Posició triada en la forma "AA23"
      * @return retorna un array amb les posicions numèriques del
      *         barco
      */
-    int[] SepararPosicions(String posicioCasella) {
-        String abecedari="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    int[] separarPosicions(final String posicioCasella) {
+        String abecedari = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         int lletresAbecedari = abecedari.length();
-        
+
         int[] resultat = new int[2];
         // Obtenir les lletres
         String partAmbLesLletres = posicioCasella.split("[0-9]+")[0];
-        
+
         int multiplicador = 1;
         int totalLletresPosicio = partAmbLesLletres.length() - 1;
-        for (int i=0; i <= totalLletresPosicio; i++) {
+        for (int i = 0; i <= totalLletresPosicio; i++) {
             int posicioLletraEnAbecedari = abecedari.indexOf(partAmbLesLletres.charAt(totalLletresPosicio-i)) + 1;
             resultat[0] = resultat[0] + posicioLletraEnAbecedari * multiplicador;
             multiplicador = multiplicador * lletresAbecedari;
@@ -50,19 +85,31 @@ public class Casella {
         resultat[0] = resultat[0] - 1;
         // Obtenir el número
         resultat[1] =  Integer.parseInt(posicioCasella.split("[A-Z]+")[1]);
-                   
+
         return resultat;
-        
+
     }
-    
+
+    /**
+     * Comprova si dues caselles són iguals això ho fa només
+     * comparant els Strings.
+     *
+     * @param altra casella
+     */
     @Override
-    public boolean equals(Object altraCasella){
+    public final boolean equals(final Object altraCasella) {
         // comprovo que no sigui 'null'
-        if (altraCasella == null) return false;
+        if (altraCasella == null) {
+            return false;
+        }
         // comprovo que no és el mateix objecte
-        if (altraCasella == this) return true;
+        if (altraCasella == this) {
+            return true;
+        }
         // comprovo que sigui realment una casella
-        if (!(altraCasella instanceof Casella))return false;
+        if (!(altraCasella instanceof Casella)) {
+            return false;
+        }
         Casella casella = (Casella)altraCasella;
         
         if (posicioString.equals(casella.getPosicioString())) {
