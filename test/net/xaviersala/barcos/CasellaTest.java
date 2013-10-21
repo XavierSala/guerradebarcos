@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TestCasella {
+public class CasellaTest {
 
     Casella c; 
     
@@ -14,6 +14,20 @@ public class TestCasella {
         c = new Casella("A1");
     }
 
+    @Test
+    public void testConstructor() throws Exception {
+        assertEquals("El valor no coincideix", "A1", c.getPosicioString());
+        assertEquals("La lletra no està bé", 0, c.getPosicioX());
+        assertEquals("El número no coincideix", 1, c.getPosicioY());
+        
+        c = new Casella("AB23");
+        assertEquals("El valor no coincideix", "AB23", c.getPosicioString());
+        assertEquals("La lletra no està bé", 27, c.getPosicioX());
+        assertEquals("El número no coincideix", 23, c.getPosicioY());
+        
+        
+    }
+    
     @Test
     public void testSepararPosicions() {
         assertEquals(3, c.separarPosicions("D3")[0]);
@@ -30,9 +44,15 @@ public class TestCasella {
         Casella A2 = new Casella("A2");        
         Casella B1 = new Casella("B1");
         
+        String casella = "A1";
+        Casella A1c = new Casella(casella);
+        
         assertEquals(A1, A1b);
         assertNotEquals(A1, B1);
         assertNotEquals(A1, A2);
+        assertEquals("Haurien de ser iguals", A1, A1c);
     }
+    
+    
 
 }

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TestBarco {
+public class BarcoTest {
 
     ArrayList<Barco> barcos = new ArrayList<Barco>();
 
