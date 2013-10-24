@@ -12,6 +12,11 @@ import java.util.ArrayList;
 public class Tauler {
 
     /**
+     * Número de barcos per defecte.
+     */
+    private static final int BARCOSDEFECTE = 3;
+
+    /**
      * Caselles d'amplada del tauler.
      */
     private int casellesAmplada;
@@ -81,7 +86,7 @@ public class Tauler {
     public Tauler(final int ampladaDesitjada, final int alturaDesitjada) {
         casellesAmplada = ampladaDesitjada;
         casellesAltura = alturaDesitjada;
-        maximNumeroDeBarcos = 3;
+        maximNumeroDeBarcos = BARCOSDEFECTE;
         barcos = new ArrayList<Barco>();
     }
 
@@ -192,8 +197,7 @@ public class Tauler {
                     } else {
                         return "enfonsat";
                     }
-                }
-                else {
+                } else {
                     return "tocat";
                 }
             }

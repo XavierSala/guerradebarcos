@@ -48,7 +48,7 @@ public class Principal {
      */
     public static void posarBarcos(final Jugador jugador) {
 
-        String[][] possiblesBarcos = {{"A1", "A2" }, {"B1", "B2", "B3" },
+        String[][] llistaBarcos = {{"A1", "A2" }, {"B1", "B2", "B3" },
                 {"A3", "B3", "C3"}, {"E1", "E2"}, {"A4", "B4", "C4" },
                 {"C3", "D3", "E3"}, {"A1", "B1"}, {"C2", "C3", "C4" },
                 {"B0", "C0", "D0"} };
@@ -61,15 +61,15 @@ public class Principal {
         for (int i = 0; i < NUMERODEBARCOS; i++) {
             String[] candidat;
             do {
-                int numeroAleatori = (int)(Math.random()*possiblesBarcos.length);
-                candidat = possiblesBarcos[numeroAleatori];
+                int aleatori = (int) (Math.random() * llistaBarcos.length);
+                candidat = llistaBarcos[aleatori];
                 respostaJugador = jugador.posaBarco(candidat);
                 System.out.println("... jugador " + jugador.getNom()
                         + " prova de posar un barco .. "
                         + respostaJugador);
             } while(respostaJugador != "OK");
 
-            System.out.print("........... jugador " + jugador.getNom()
+            System.out.println("........... jugador " + jugador.getNom()
                     + " posa  barco a " + imprimeixBarco(candidat));
 
         }
@@ -78,24 +78,31 @@ public class Principal {
     /**
      * Imprimeix el candidat a barco que s'ha especificat.
      *
-     * @param candidat
+     * @param candidat Barco que es vol incloure
+     * @return Cadena amb el barco a imprimir
      */
-    private static String imprimeixBarco(String[] candidat) {
+    private static String imprimeixBarco(final String[] candidat) {
 
         String resultat = "";
-        for(String s: candidat) {
+        for (String s: candidat) {
             resultat += s + " ";
         }
         return resultat;
     }
 
-    public static void main(String[] args) {
+    /**
+     * Programa principal.
+     *
+     * @param args No es fa servir.
+     */
+    public static void main(final String[] args) {
 
         ArrayList<Jugador> jugadors = new ArrayList<Jugador>();
 
         for (int i = 0; i < JUGADORS; i++) {
             jugadors.add(new Jugador(NOMSJUGADORS[i]));
-            jugadors.get(jugadors.size()-1).agafaTauler(new Tauler(AMPLADATAULER,ALTURATAULER)); 
+            Tauler t = new Tauler(AMPLADATAULER, ALTURATAULER);
+            jugadors.get(jugadors.size() - 1).agafaTauler(t);
             posarBarcos(jugadors.get(i));
         }
 

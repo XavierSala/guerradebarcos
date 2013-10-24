@@ -20,11 +20,11 @@ public class Jugador {
     /**
      * Amplada màxima possible a triar.
      */
-    int possibleAmplada;
+    private int possibleAmplada;
     /**
      * Altura màxima possible a triar.
      */
-    int possibleAltura;
+    private int possibleAltura;
 
     /**
      * Construeix un jugador a partir del seu nom.
@@ -45,6 +45,24 @@ public class Jugador {
         tauler = t;
         possibleAmplada = tauler.getAmpladaTauler();
         possibleAltura = tauler.getAlturaTauler();
+    }
+
+    /**
+     * Retorna la amplada del tauler.
+     *
+     * @return l'amplada del tauler
+     */
+    public final int getAmpladaTauler() {
+        return possibleAmplada;
+    }
+
+    /**
+     * Retorna l'altura del tauler.
+     *
+     * @return l'altura del tauler
+     */
+    public final int getAlturaTauler() {
+        return possibleAltura;
     }
 
     /**

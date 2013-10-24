@@ -58,13 +58,13 @@ public class Barco {
 
         // Miro les dues primeres posicions per saber
         // si és horitzontal o vertical
-        Casella posicioInicial0 = caselles.get(0);
-        Casella posicioInicial1 = caselles.get(1);
+        Casella posicio0 = caselles.get(0);
+        Casella posicio1 = caselles.get(1);
 
         // Comprovo si és un barco...
-        if (posicioInicial0.getPosicioX() == posicioInicial1.getPosicioX()) {
+        if (posicio0.getPosicioX() == posicio1.getPosicioX()) {
             return isBarcoHoritzontal();
-        } else if (posicioInicial0.getPosicioY() == posicioInicial1.getPosicioY()) {
+        } else if (posicio0.getPosicioY() == posicio1.getPosicioY()) {
             return isBarcoVertical();
         }
         return false;
@@ -125,7 +125,7 @@ public class Barco {
      * @param casellaAComprovar La posició a comprovar
      * @return Retorna si l'ha trobat o no
      */
-    public int comprovaPosicio(String casellaAComprovar) {
+    public final int comprovaPosicio(final String casellaAComprovar) {
 
         if (casellaAComprovar == null) {
             return -1;

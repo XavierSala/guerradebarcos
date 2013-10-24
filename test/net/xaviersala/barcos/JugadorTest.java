@@ -14,15 +14,14 @@ public class JugadorTest {
     @Test
     public void testGenerarPosicions() {
         Jugador j = new Jugador("prova");
-        j.possibleAltura = 5;
-        j.possibleAmplada = 5;
-        
-        
-        for(int i=0; i<10; i++) {
+        Tauler t = new Tauler(5,5);
+        j.agafaTauler(t);
+
+        for (int i = 0; i < 10; i++) {
             String resultat = j.endevinaBarco();
             assertTrue(resultat.matches("[A-Z]+[0-9]+"));
         }
-        
+
     }
 
 }

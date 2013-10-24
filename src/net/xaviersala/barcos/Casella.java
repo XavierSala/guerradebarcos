@@ -76,10 +76,12 @@ public class Casella {
         String partAmbLesLletres = posicioCasella.split("[0-9]+")[0];
 
         int multiplicador = 1;
-        int totalLletresPosicio = partAmbLesLletres.length() - 1;
-        for (int i = 0; i <= totalLletresPosicio; i++) {
-            int posicioLletraEnAbecedari = abecedari.indexOf(partAmbLesLletres.charAt(totalLletresPosicio-i)) + 1;
-            resultat[0] = resultat[0] + posicioLletraEnAbecedari * multiplicador;
+        int totalLletres = partAmbLesLletres.length() - 1;
+        for (int i = 0; i <= totalLletres; i++) {
+            char caracterAvaluar = partAmbLesLletres.charAt(totalLletres - i);
+            int posicioEnAbecedari = abecedari.indexOf(caracterAvaluar) + 1;
+            resultat[0] = resultat[0]
+                    + posicioEnAbecedari * multiplicador;
             multiplicador = multiplicador * lletresAbecedari;
         }
         resultat[0] = resultat[0] - 1;
@@ -90,11 +92,29 @@ public class Casella {
 
     }
 
+
+    /**
+     * Dóna un identificador únic per la classe segons la especificació
+     * de Java
+     *
+     * Torno el mateix però no ho hauria de fer.
+     *
+     * @return codi
+     *
+     */
+    @Override
+    public final int hashCode() {
+        int result = 0;
+        result = 1;
+        return result;
+      }
+
     /**
      * Comprova si dues caselles són iguals això ho fa només
      * comparant els Strings.
      *
-     * @param altra casella
+     * @param altraCasella casella que es vol comprovar si és igual
+     * @return La casella és igual que aquesta
      */
     @Override
     public final boolean equals(final Object altraCasella) {
@@ -110,12 +130,12 @@ public class Casella {
         if (!(altraCasella instanceof Casella)) {
             return false;
         }
-        Casella casella = (Casella)altraCasella;
-        
+        Casella casella = (Casella) altraCasella;
+
         if (posicioString.equals(casella.getPosicioString())) {
             return true;
         }
         return false;
     }
-    
+
 }
