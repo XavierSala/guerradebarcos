@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * @author Xavier
  *
  */
-public class Principal {
+public final class Principal {
 
 
     /**
@@ -39,6 +39,12 @@ public class Principal {
      */
     public static final String[] NOMSJUGADORS = {"Pere", "Pau"};
 
+    /**
+     * Utility classes error.
+     */
+    private Principal() {
+
+    };
     /**
      * Funció que se n'encarrega d'assignar barcos a cada un dels
      * jugadors. Ho fa entre els barcos de la taula que he creat

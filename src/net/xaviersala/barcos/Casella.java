@@ -67,7 +67,7 @@ public class Casella {
      * @return retorna un array amb les posicions numèriques del
      *         barco
      */
-    int[] separarPosicions(final String posicioCasella) {
+    final int[] separarPosicions(final String posicioCasella) {
         String abecedari = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         int lletresAbecedari = abecedari.length();
 
